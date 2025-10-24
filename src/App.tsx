@@ -1,59 +1,70 @@
-import { useState } from 'react'
-import './App.css';
-import CardPost from './components/CardPost/CardPost';
+import { useState } from "react";
+import "./App.css";
+import CardPost from "./components/CardPost/CardPost";
 
 export interface PostProps {
-  nome: string,
-  mensagem: string,
+  nome: string;
+  mensagem: string;
 }
 
-export default function App(){
-  const [inputNome, setInputNome] = useState('')
-  const [inputMensagem, setInputMensagem] = useState('')
-  const [posts, setPosts] = useState<PostProps[]>([])
+export default function App() {
+  const [inputNome, setInputNome] = useState("");
+  const [inputMensagem, setInputMensagem] = useState("");
+  const [posts, setPosts] = useState<PostProps[]>([]);
 
-  function handleAdd(){
-    setPosts([...posts, {nome: inputNome, mensagem: inputMensagem}])
+  function handleAdd() {
+    if (!inputNome.trim() || !inputMensagem.trim()) {
+      alert("Por favor, preencha todos os campos!");
+      return;
+    }
+    setPosts([...posts, { nome: inputNome, mensagem: inputMensagem }]);
 
-    setInputNome('')
-    setInputMensagem('')
+    setInputNome("");
+    setInputMensagem("");
   }
 
-  function handleDelete(index: number){
-    setPosts(posts.filter((_, i) => i !== index))
+  function handleDelete(index: number) {
+    setPosts(posts.filter((_, i) => i !== index));
   }
 
-  return(
-    <main className='main-container'>
-      <h1 className='title-main'>Post-it</h1>
+  return (
+    <main className="main-container">
+      <h1 className="title-main">Post-it</h1>
 
-        <div className='container-form'>
-         <input 
-            className='input-nome'
-            type="text"
-            placeholder='Nome do post-it'
-            value={inputNome}
-            onChange={(e)=> setInputNome(e.target.value)}
-            required
-         />
+      <div className="container-form">
+        <input
+          className="input-nome"
+          type="text"
+          placeholder="Nome do post-it"
+          value={inputNome}
+          onChange={(e) => setInputNome(e.target.value)}
+          required
+        />
 
-         <input
-            className='input-mensagem' 
-            type="text"
-            placeholder='Mensagem'
-            value={inputMensagem}
-            onChange={(e)=> setInputMensagem(e.target.value)}
-            required
-         />
+        <input
+          className="input-mensagem"
+          type="text"
+          placeholder="Mensagem"
+          value={inputMensagem}
+          onChange={(e) => setInputMensagem(e.target.value)}
+          required
+        />
 
-         <button onClick={handleAdd} className='btn-criar'>Criar</button>
+        <button onClick={handleAdd} className="btn-criar">
+          Criar
+        </button>
       </div>
 
-      <section className='post-container'>
+      <section className="post-container">
         {posts.map((post, index) => (
-          <CardPost key={index} nome={post.nome} mensagem={post.mensagem} onDelete={()=> handleDelete(index)} />
+          <CardPost
+            key={index}
+            nome={post.nome}
+            mensagem={post.mensagem}
+            onDelete={() => handleDelete(index)}
+          />
         ))}
       </section>
     </main>
-  )
+  );
 }
