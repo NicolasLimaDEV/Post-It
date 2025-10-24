@@ -4,7 +4,7 @@ import CardPost from './components/CardPost/CardPost';
 
 export interface PostProps {
   nome: string,
-  mensagem: string
+  mensagem: string,
 }
 
 export default function App(){
@@ -17,6 +17,10 @@ export default function App(){
 
     setInputNome('')
     setInputMensagem('')
+  }
+
+  function handleDelete(index: number){
+    setPosts(posts.filter((_, i) => i !== index))
   }
 
   return(
@@ -47,7 +51,7 @@ export default function App(){
 
       <section className='post-container'>
         {posts.map((post, index) => (
-          <CardPost key={index} nome={post.nome} mensagem={post.mensagem} />
+          <CardPost key={index} nome={post.nome} mensagem={post.mensagem} onDelete={()=> handleDelete(index)} />
         ))}
       </section>
     </main>
