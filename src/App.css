@@ -1,0 +1,22 @@
+.main-container{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   height: 100vh;
+   padding: 20px;
+}
+
+.title-main{
+   font-size: 60px;
+}
+
+/* Post-it container */
+.post-container{
+   padding: 20px;
+   max-width: 1360px;
+   height: 300px;
+   width: 100%;
+   display: flex;
+   flex-wrap: wrap;
+}
