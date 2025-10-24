@@ -1,19 +1,17 @@
 import "./CardPost.css";
+import type { PostProps } from '../../App';
 
-export default function CardPost() {
+export default function CardPost({nome, mensagem}: PostProps) {
   return (
     <>
       <div className="card">
         <div className="card-header">
-          <h3>Nome do Post-it</h3>
+          <h3>{nome}</h3>
           <button>Excluir</button>
         </div>
         <div className="card-text">
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe
-            repellat voluptate nam porro impedit, optio iusto veritatis in quia
-            odio exercitationem nisi eligendi expedita id nobis dolorem beatae
-            at obcaecati!
+            {mensagem}
           </p>
         </div>
       </div>
